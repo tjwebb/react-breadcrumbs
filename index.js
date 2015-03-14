@@ -29,7 +29,11 @@ var Breadcrumbs = React.createClass({
             routes=arr;
         }
 
-        routes.forEach(function (route, i, arr) {
+        var filtered = routes.filter(function (route) {
+          return (this.props.ignore || [ ]).indexOf(route.name) === -1;
+        }, this);
+
+        filtered.forEach(function (route, i, arr) {
             var name, link, missingParams = false;
 
             name = route.handler.displayName;
